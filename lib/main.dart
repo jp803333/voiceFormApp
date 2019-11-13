@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recorder_wav/recorder_wav.dart';
 import 'function.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -41,17 +42,18 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     } else {
       String filePath = await RecorderWav.StopRecorder();
-      // RecorderWav.removeRecorderFile(filePath);
-      setState(() {
-        _counter = getText(filePath).toString();
-        _recording = !_recording;
-        _color = Colors.black;
+      getText(filePath).then((str) {
+        setState(() {
+          _counter = str;
+          _recording = !_recording;
+          _color = Colors.black;
+        });
       });
+      RecorderWav.removeRecorderFile(filePath);
     }
   }
   // ....................
   // ..............to here dont change.
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
+            // Text(
+            //   'You have pushed the button this many times:',
+            // ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              // style: Theme.of(context).textTheme.display1,
             ),
           ],
         ),
