@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:recorder_wav/recorder_wav.dart';
 import 'function.dart';
@@ -31,11 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String _counter = ' ';
   bool _recording = false;
   Color _color = Colors.black;
-
-  // From her to .....
-  // .................
+  String _ipaddress;
+  TextEditingController _ipcontroller = new TextEditingController();
   void _voice() async {
-    // _counter++;
     if (!_recording) {
       RecorderWav.startRecorder();
       setState(() {
@@ -45,19 +41,16 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       String filePath = await RecorderWav.StopRecorder();
       print(filePath);
-      File audio = new File(filePath);
-      getText(audio, filePath).then((str) {
+      getText(_ipaddress, filePath).then((str) {
         setState(() {
           _counter = str;
           _recording = !_recording;
           _color = Colors.black;
-          RecorderWav.removeRecorderFile(filePath);
+          // RecorderWav.removeRecorderFile(filePath);
         });
       });
     }
   }
-  // ....................
-  // ..............to here dont change.
 
   @override
   Widget build(BuildContext context) {
@@ -67,21 +60,26 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            // Text(
-            //   'You have pushed the button this many times:',
-            // ),
+            TextField(
+              controller: _ipcontroller,
+            ),
+            InkWell(
+              child: Text('submit'),
+              onTap: () {
+                _ipaddress = _ipcontroller.text;
+                print(_ipaddress);
+              },
+            ),
             Text(
               '$_counter',
-              // style: Theme.of(context).textTheme.display1,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _voice,
-        // tooltip: 'Increment',
         child: Icon(
           Icons.mic,
           color: _color,
