@@ -1,16 +1,20 @@
 # formapp
 
-A new Flutter project.
+An app to show form filling based on voice
+
+Prerequisite:
+ Flutter installed on your pc.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+```bash
+git clone <git-url>
+cd formapp
+```
+## Setting the device
 
-A few resources to get you started if this is your first Flutter project:
+Connect your phone and enable developer model.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter run
+```
