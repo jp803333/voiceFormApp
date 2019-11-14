@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:recorder_wav/recorder_wav.dart';
 import 'function.dart';
@@ -42,14 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     } else {
       String filePath = await RecorderWav.StopRecorder();
-      getText(filePath).then((str) {
+      print(filePath);
+      File audio = new File(filePath);
+      getText(audio, filePath).then((str) {
         setState(() {
           _counter = str;
           _recording = !_recording;
           _color = Colors.black;
+          RecorderWav.removeRecorderFile(filePath);
         });
       });
-      RecorderWav.removeRecorderFile(filePath);
     }
   }
   // ....................
