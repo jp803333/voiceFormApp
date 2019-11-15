@@ -13,7 +13,7 @@ cd formapp
 ```
 ## Setting the device
 
-Connect your phone and enable developer model.
+Connect your phone and enable developer mode.
 
 ```bash
 flutter run
